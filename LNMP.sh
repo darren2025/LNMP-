@@ -1,6 +1,11 @@
 #!/bin/bash
 #安装nginx
 yum -y install gcc pcre-devel openssl-devel zlib-devel
+yum -y install libxml2-devel libjpeg-devel libpng-devel freetype-devel
+wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx
+wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx.service
+wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx-1.16.1.tar.gz
+wget https://raw.githubusercontent.com/darren2025/LNMP-/master/php-7.3.2.tar.gz
 cp nginx /etc/init.d
 cp nginx nginx.service /usr/lib/systemd/system
 chmod +x nginx /etc/init.d/nginx
@@ -26,7 +31,6 @@ iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 service iptables save 
 service iptables restart 
 #安装PHP
-yum -y install libxml2-devel libjpeg-devel libpng-devel freetype-devel
 #解压进入解压目录
 tar -zxvf php-7.3.2.tar.gz
 cd php-7.3.2
