@@ -9,27 +9,6 @@ wget https://raw.githubusercontent.com/darren2025/LNMP-/master/php-7.3.2.tar.gz
 cp nginx /etc/init.d
 cp nginx nginx.service /usr/lib/systemd/system
 chmod +x nginx /etc/init.d/nginx
-#添加用户和用户组 设置程序启动的用户
-groupadd www
-useradd -M -g www -s /usr/sbin/nologin www
-#解压源码包
-tar -zxvf nginx-1.16.1.tar.gz
-#编译安装过程
-cd nginx-1.16.1
-./configure --user=www --group=www  \
---prefix=/usr/local/nginx \
---with-http_stub_status_module \
---with-http_ssl_module \
-#编译 && 安装
-make && make install
-systemctl daemon-reload
-service nginx start
-#添加开机自启
-systemctl enable nginx.service
-#添加防火墙规则
-iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-service iptables save 
-service iptables restart 
 #安装PHP
 #解压进入解压目录
 tar -zxvf php-7.3.2.tar.gz
@@ -65,6 +44,29 @@ source /etc/profile
 service php-fpm start
 #添加开机自启
 systemctl enable php-fpm.service
+#安装nginx
+#添加用户和用户组 设置程序启动的用户
+groupadd www
+useradd -M -g www -s /usr/sbin/nologin www
+#解压源码包
+tar -zxvf nginx-1.16.1.tar.gz
+#编译安装过程
+cd nginx-1.16.1
+./configure --user=www --group=www  \
+--prefix=/usr/local/nginx \
+--with-http_stub_status_module \
+--with-http_ssl_module \
+#编译 && 安装
+make && make install
+systemctl daemon-reload
+service nginx start
+#添加开机自启
+systemctl enable nginx.service
+#添加防火墙规则
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+service iptables save 
+service iptables restart 
+
 
 v=`cat /etc/redhat-release|sed -r 's/.* ([0-9]+)\..*/\1/'`
  if [ $v -eq 6 ]; then
