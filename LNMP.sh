@@ -6,44 +6,12 @@ wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx.service
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx-1.16.1.tar.gz
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/php-7.3.2.tar.gz
+wget https://raw.githubusercontent.com/darren2025/LNMP-/master/php.sh
 cp nginx /etc/init.d
 cp nginx nginx.service /usr/lib/systemd/system
 chmod +x nginx /etc/init.d/nginx
-#安装PHP
-#解压进入解压目录
-tar -zxvf php-7.3.2.tar.gz
-cd php-7.3.2
-#配置
-./configure --prefix=/usr/local/php_nginx \
---with-config-file-path=/usr/local/php/etc \
---with-fpm-user=www \
---with-fpm-group=www \
---with-pdo-mysql=mysqlnd \
---with-mysqli=mysqlnd \
---with-freetype-dir \
---with-gd \
---with-zlib \
---with-libxml-dir \
---with-jpeg-dir \
---with-png-dir \
---enable-mbstring=all \
---enable-mbregex \
---enable-shared \
---enable-fpm \
---without-pear
-make && make install
-cp /usr/local/php_nginx/etc/php-fpm.conf.default /usr/local/php_nginx/etc/php-fpm.conf
-cp /usr/local/php_nginx/etc/php-fpm.d/www.conf.default /usr/local/php_nginx/etc/php-fpm.d/www.conf
-cp php.ini-development /usr/local/php_nginx/etc/php.ini
-cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-chmod +x /etc/init.d/php-fpm
-chkconfig --add php-fpm
-chkconfig php-fpm on
-echo 'PATH=/usr/local/php/bin:$PATH' >> /etc/profile
-source /etc/profile
-service php-fpm start
-#添加开机自启
-systemctl enable php-fpm.service
+chmod +x php.sh 
+sh php.sh
 #安装nginx
 #添加用户和用户组 设置程序启动的用户
 groupadd www
@@ -66,6 +34,7 @@ systemctl enable nginx.service
 iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 service iptables save 
 service iptables restart 
+
 
 
 v=`cat /etc/redhat-release|sed -r 's/.* ([0-9]+)\..*/\1/'`
