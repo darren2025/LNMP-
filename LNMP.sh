@@ -1,7 +1,7 @@
 #!/bin/bash
-#安装nginx
-yum -y install gcc pcre-devel openssl-devel zlib-devel
-yum -y install libxml2-devel libjpeg-devel libpng-devel freetype-devel
+#安装nginx 
+yum -y install gcc pcre-devel openssl-devel zlib-devel bzip2-devel curl-devel libjpeg-devel libpng-devel freetype-devel libxslt-devel 
+yum -y install libxml2-devel libjpeg-devel libpng-devel freetype-devel libzip-devel libxml2-devel
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx.service
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx-1.16.1.tar.gz
@@ -45,19 +45,7 @@ cd php-7.3.2
 --with-config-file-path=/usr/local/php/etc \
 --with-fpm-user=www \
 --with-fpm-group=www \
---with-pdo-mysql=mysqlnd \
---with-mysqli=mysqlnd \
---with-freetype-dir \
---with-gd \
---with-zlib \
---with-libxml-dir \
---with-jpeg-dir \
---with-png-dir \
---enable-mbstring=all \
---enable-mbregex \
---enable-shared \
---enable-fpm \
---without-pear
+--with-curl --with-freetype-dir --with-gd --with-gettext --with-iconv-dir --with-kerberos --with-libdir=lib64 --with-libxml-dir --with-mysqli --with-openssl --with-pcre-regex --with-pdo-mysql --with-pdo-sqlite --with-pear --with-png-dir --with-jpeg-dir --with-xmlrpc --with-xsl --with-zlib --with-bz2 --with-mhash --enable-fpm --enable-bcmath --enable-libxml --enable-inline-optimization --enable-mbregex --enable-mbstring --enable-opcache --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvsem --enable-sysvshm --enable-xml --enable-zip --enable-fpm
 make && make install
 cp /usr/local/php_nginx/etc/php-fpm.conf.default /usr/local/php_nginx/etc/php-fpm.conf
 cp /usr/local/php_nginx/etc/php-fpm.d/www.conf.default /usr/local/php_nginx/etc/php-fpm.d/www.conf
