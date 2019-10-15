@@ -1,3 +1,4 @@
+#!/bin/bash
 #创建一个src目录方便管理包
 mkdir /src
 cd /src
