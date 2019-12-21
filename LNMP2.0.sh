@@ -2,7 +2,7 @@
 #创建一个src目录方便管理包
 mkdir /src
 cd /src
-yum update
+yum update -y
 yum -y install gcc pcre-devel openssl-devel zlib-devel
 wget http://nginx.org/download/nginx-1.16.1.tar.gz
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx
@@ -34,7 +34,7 @@ yum install -y mod_php72w php72w-mysqlnd php72w-cli php72w-dev php72w-fpm php72w
 
 #安装mysql
 wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 
-yum localinstall mysql57-community-release-el7-8.noarch.rpm
+yum -y localinstall mysql57-community-release-el7-8.noarch.rpm
 
 #安装MySQL数据库 约190M左右
 yum install -y mysql-community-server
