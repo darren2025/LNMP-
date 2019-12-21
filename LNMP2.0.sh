@@ -9,6 +9,7 @@ wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx
 wget https://raw.githubusercontent.com/darren2025/LNMP-/master/nginx.service
 cp nginx /etc/init.d
 cp nginx nginx.service /usr/lib/systemd/system
+chmod +x nginx /etc/init.d/nginx
 tar zxf nginx-1.16.1.tar.gz
 #添加用户和用户组 设置程序启动的用户
 groupadd www
@@ -40,6 +41,8 @@ yum -y localinstall mysql57-community-release-el7-8.noarch.rpm
 yum install -y mysql-community-server
 #启动数据库
 systemctl start mysqld
+#启动php
+systemctl start php-fpm
 # 查看初始密码
 grep 'temporary password' /var/log/mysqld.log
 
