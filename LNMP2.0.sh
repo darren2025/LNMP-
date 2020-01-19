@@ -31,7 +31,7 @@ cd /src
 yum install -y gcc-c++ libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel
 rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
-yum install -y mod_php72w php72w-mysqlnd php72w-cli php72w-dev php72w-fpm php72w-gd php72w-pdo  php72w-mbstring php72w-opcache php72w-devel.x86_64
+yum install -y mod_php72w php72w-mysqlnd php72w-cli php72w-dev php72w-fpm php72w-gd php72w-pdo  php72w-mbstring php72w-opcache php72w-devel.x86_64 php72w-xml.x86_64
 
 #安装mysql
 wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm 
